@@ -18,6 +18,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            // This will load the main menu
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
+
         if (health == 0)
         {
             winLoseText.text = "Game Over!";
