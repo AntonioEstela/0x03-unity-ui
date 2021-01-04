@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     public Text healthText;
     public Text scoreText;
     public GameObject winLose;
-
     public Image winLoseImg;
     public Text winLoseText;
 
