@@ -10,15 +10,22 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     private int score = 0;
     public int health = 5;
-
+    public Text healthText;
     public Text scoreText;
+    public GameObject winLose;
+
+    public Image winLoseImg;
+    public Text winLoseText;
 
     void Update()
     {
         if (health == 0)
         {
-            Debug.Log("Game Over!");
-            SceneManager.LoadScene("maze");
+            winLoseText.text = "Game Over!";
+            winLoseText.color = new Color(1, 1, 1, 1);
+            winLoseImg.color = new Color(1, 0, 0, 1);
+            winLose.SetActive(true);
+            StartCoroutine(LoadScene(3));
         }
     }
     void FixedUpdate()
@@ -43,17 +50,32 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Trap")
         {
             health -= 1;
-            Debug.Log($"Health: {health}");
+            SetHealthText();
         }
 
         if (other.tag == "Goal")
         {
-            Debug.Log("You win!");
+            winLose.SetActive(true);
+            winLoseText.text = "You Win!";
+            winLoseText.color = new Color(0, 0, 0, 1);
+            winLoseImg.color = new Color(0, 1, 0);
+            StartCoroutine(LoadScene(3));
         }
     }
 
     void SetScoreText()
     {
         scoreText.text = $"Score: {score.ToString()}";
+    }
+
+    void SetHealthText()
+    {
+        healthText.text = $"Health: {health.ToString()}";
+    }
+
+    IEnumerator LoadScene(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        SceneManager.LoadScene("maze");
     }
 }
