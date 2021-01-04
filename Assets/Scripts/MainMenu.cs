@@ -10,4 +10,11 @@ public class MainMenu : MonoBehaviour
         // This will load the game :D
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void QuitMaze()
+    {
+        // This will quit the game :D
+        Debug.Log("Quit Game");
+        Application.Quit();
+    }
 }
